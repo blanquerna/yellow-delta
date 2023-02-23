@@ -1,3 +1,7 @@
+## HTML semàntic
+S'ha redefinit l'estructura de les pàgines seguin amb l'esquema i elements d'etiquetes d'acord amb el model
+
+<p align="center"><img src="page-structure.png?raw=true" alt="Captura de pantalla" width="400">  <img src="page-structure.png?raw=true" alt="Captura de pantalla" width="400"></p>
 
 ## Del js : _rho.js_
 És un script mínim amb dues úniques funcions:
