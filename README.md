@@ -6,7 +6,7 @@ Basad en la gran feina de disseny de l'equip de Datenstrom i de Martin Blomgren 
 ## Semantic HTML
 Redefined the structure of the following pages with the layout and tag elements according to the model
 
-<p align="center"><img src="semantic-html-structure-h.png?raw=true" alt="Screenshot" width="300">&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;<img src="semantic-html-structure-v.png?raw=true" alt="Screenshot" width="300"></p>
+<p align="center"><img src="semantic-html-structure-h.png?raw=true" alt="Screenshot" width="350">&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;<img src="semantic-html-structure-v.png?raw=true" alt="Screenshot" width="350"></p>
 
 All basic layout options are in the **delta.css** file.
 
