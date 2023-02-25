@@ -1,0 +1,44 @@
+<?php $this->yellow->layout("header") ?>
+<main class="content aside">
+<section class="main" role="main">
+    <ul class="posts" id="posts">
+    <?php if ($this->yellow->page->get("blogWithFilter")): 
+        $searchParam=""; $searchValue=preg_split("/\s*:\s*/", $this->yellow->page->getHtml("titleContent"))[1];
+        if($this->yellow->page->isRequest("tag"))  $searchParam='<span style="margin-bottom: 0;"><svg class="icon" style="transform: scale(2.5);"><use xlink:href="#tag"></use></svg></span>'; //$searchParam="Etiqueta:";
+            else if($this->yellow->page->isRequest("author")){
+                $authorName=str_replace(' ', '',"media/thumbnails/".$searchValue.".png"); 
+                if (file_exists($authorName)) { 
+                    $authorName=$this->yellow->page->getBase(true).'/'.$authorName; 
+                    $searchParam='<img src="'.$authorName.'" class="icon icon_2" alt="Ca nostra" style="transform: scale(2);padding:0 32px">'; 
+                } else $searchParam='<span style="margin-bottom: 0;padding:0 16px;"><svg class="icon" style="transform: scale(2);"><use xlink:href="#author"></use></svg></span>'; 
+            }
+            else $searchParam=preg_split("/\s*:\s*/", $this->yellow->page->getHtml("titleContent"))[0];
+        echo "<h1>".$searchParam." ".$searchValue."</h1>";
+    endif;
+    foreach ($this->yellow->page->getPages("blog")->paginate($this->yellow->system->get("blogPaginationLimit")) as $page): 
+        $page->set("entryClass", "entry"); 
+        if ($page->isExisting("tag")): 
+            foreach (preg_split("/\s*,\s*/", $page->get("tag")) as $tag) { $page->set("entryClass", $page->get("entryClass")." tag-".$this->yellow->lookup->normaliseArguments($tag, false)); } ;
+        endif ?>
+        <li class="<?php echo $page->getHtml("entryClass") ?>">
+        <div class="entry-title"><h1><a href="<?php echo $page->getLocation(true) ?>"><?php echo $page->getHtml("title") ?></a></h1></div>
+        <div class="entry-meta">
+            <p><span>
+                <?php $authorName=str_replace(' ', '',"media/thumbnails/".$page->get("author").".png"); 
+                if (file_exists($authorName)) { 
+                    $authorName=$this->yellow->page->getBase(true).'/'.$authorName; 
+                    $authorName='<img src="'.$authorName.'" class="icon icon_2" alt="Ca nostra">'; 
+                } else $authorName='<svg class="icon"><use xlink:href="#author"></use></svg></span>'; 
+                echo $authorName;
+                $authorCounter = 0; foreach (preg_split("/\s*,\s*/", $page->get("author")) as $author) { if (++$authorCounter>1) echo ", "; echo "<a href=\"".$this->yellow->page->getLocation(true).$this->yellow->lookup->normaliseArguments("author:$author")."\">".htmlspecialchars($author)."</a>"; } ?>
+                <span> · <svg class="icon"><use xlink:href="#calendar"></use></svg></span><?php echo $page->getDateHtml("published") ?>
+            </p></div>
+        <div class="entry-content"><?php echo $this->yellow->toolbox->createTextDescription($page->getContent(), 0, false, "<!--more-->", "<a href=\"".$page->getLocation(true)."\">".$this->yellow->language->getTextHtml("blogMore")."</a>") ?></div>
+        </li>
+    <?php endforeach;?>
+    <?php $this->yellow->layout("pagination", $this->yellow->page->getPages("blog")); ?>
+    </ul>
+</section>
+</main>
+<?php $this->yellow->layout("blog-sidebar"); ?>
+<?php $this->yellow->layout("footer"); ?>

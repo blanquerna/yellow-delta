@@ -1,0 +1,90 @@
+<?php $pages = $this->yellow->content->index()->filter("layout", "blog")->sort("published", false)->limit(20) ?>
+<?php
+$tags = array();
+$author = array();
+$recents = null;
+$recentCounter = 0;
+foreach ($pages as $page) {
+    if ($recentCounter++<5) {
+      $recents .= "<li><a href=\"".$page->getLocation(true)."\" class=\"nav-link\">".$page->getHtml("title")."</a></li>";
+    }
+    if ($page->isExisting("tag")) {
+        foreach (preg_split("/\s*,\s*/", $page->get("tag")) as $entry) {
+            if (!isset($tags[$entry])) $tags[$entry] = 0;
+            ++$tags[$entry];
+        }
+    }
+    if ($page->isExisting("author")) {
+        foreach (preg_split("/\s*,\s*/", $page->get("author")) as $entry) {
+            if (!isset($author[$entry])) $author[$entry] = 0;
+            ++$author[$entry];
+        }
+    }
+}
+?>
+<aside class="sidebar">
+<section>
+    <article>
+    <?php if ($this->yellow->content->find("/about/")): 
+        $page = $this->yellow->content->find("/about/"); 
+/*        echo "<h2>".$page->getHtml("titleContent")."</h2>"; */
+        echo $this->yellow->toolbox->createTextDescription($page->getContent(), 0, false, "<!--more-->", "<a href=\"".$page->getLocation(true)."\">".$this->yellow->language->getTextHtml("blogMore")."</a>");
+        echo "<hr/>";
+    endif ?>   
+    </article>
+    <article>
+    <!-- Recent posts widget -->
+        <h2 class="mt-4">
+        <?php if($this->yellow->language->getTextHtml("BlogRecent")[0]=="[") echo "Publicacions recents";
+                else echo $this->yellow->language->getTextHtml("BlogRecent"); ?>
+        </h2>
+        <ul class="flex-column">
+            <?php echo $recents ?>
+        </ul>
+        <hr/>
+    </article>
+    <article>
+        <h2 class="mt-4 taxonomy" id="tags-section">
+        <?php if($this->yellow->language->getTextHtml("BlogTags")[0]=="[") echo "Etiquetes";
+                else echo $this->yellow->language->getTextHtml("BlogTags"); ?>
+        </h2>      
+        <?php
+        $output = null;
+        
+        if($this->yellow->page->isRequest("author") || $this->yellow->page->isRequest("tag")) $baseURL=$this->yellow->page->getUrl();
+        else $baseURL=$this->yellow->page->getPage("blogStart")->getLocation(true);
+        if (count($tags)) {
+            uasort($tags, "strnatcasecmp");
+            uksort($tags, "strnatcasecmp");
+            $output .= "<dl>";
+            foreach ($tags as $key=>$value) {
+                $output .= "<dt><a href=\"".$baseURL.$this->yellow->toolbox->normaliseArguments("tag:$key")." \" class=\"post_tag button button_translucent\">".$key."<span class=\"button_tally\">".$value."</span></a></dt>";
+            }
+            $output .= "</dl>\n";
+        }
+        echo $output;
+        ?>
+        <br/><hr/>
+    </article>
+    <article>
+        <h2 class="mt-4 taxonomy" id="authors-section">
+        <?php if($this->yellow->language->getTextHtml("BlogAuthors")[0]=="[") echo "Autors:";
+                else echo $this->yellow->language->getTextHtml("BlogAuthors"); ?>
+        </h2> 
+        <?php
+        $output = null;
+        if (count($author)) {
+            uasort($author, "strnatcasecmp");
+            uksort($author, "strnatcasecmp");
+            $output .= "<dl>";
+            foreach ($author as $key=>$value) {
+                $output .= "<dt><a href=\"".$baseURL.$this->yellow->toolbox->normaliseArguments("author:$key")." \" class=\"post_tag button button_translucent\">".$key."<span class=\"button_tally\">".$value."</span></a></dt>";
+            }
+            $output .= "</dl>\n";
+        }
+        echo $output;
+        ?>
+        <br/><br/>
+    </article>
+</section>
+</aside>

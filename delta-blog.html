@@ -1,0 +1,42 @@
+<?php $this->yellow->layout("header") ?>
+<main class="content aside">
+<section class="main" role="main">
+<?php $this->yellow->page->set("entryClass", "entry");
+if ($this->yellow->page->isExisting("tag")): 
+    foreach (preg_split("/\s*,\s*/", $this->yellow->page->get("tag")) as $tag) { $this->yellow->page->set("entryClass", $this->yellow->page->get("entryClass")." tag-".$this->yellow->lookup->normaliseArguments($tag, false)); };
+endif ?>
+<article class="<?php echo $this->yellow->page->getHtml("entryClass") ?>">
+    <div class="entry-title"><h1><?php echo $this->yellow->page->getHtml("titleContent") ?></h1></div>
+    <div class="entry-meta"><p>
+        <span>
+        <?php $authorName=str_replace(' ', '',"media/thumbnails/".$this->yellow->page->get("author").".png"); ?>
+        <? if (file_exists($authorName)) { ?>
+        <? $authorName=$this->yellow->page->getBase(true).'/'.$authorName; ?>
+        <? $authorName='<img src="'.$authorName.'" class="icon icon_2" alt="Ca nostra"></span>'; ?>
+        <?php } else { ?>
+        <? $authorName='<svg class="icon"><use xlink:href="#author"></use></svg></span>'; ?>
+        <?php } ?>
+        <?php echo $authorName ?>
+        <?php $authorCounter = 0; foreach (preg_split("/\s*,\s*/", $this->yellow->page->get("author")) as $author) { if (++$authorCounter>1) echo ", "; echo "<a href=\"".$this->yellow->page->getPage("blogStart")->getLocation(true).$this->yellow->lookup->normaliseArguments("author:$author")."\">".htmlspecialchars($author)."</a>"; } ?>
+        <span> · <svg class="icon"><use xlink:href="#calendar"></use></svg></span><?php echo $this->yellow->page->getDateHtml("published") ?>
+
+<?php $this->yellow->layout("blog-share") ?>
+    </p></div>
+    <div class="entry-content"><?php echo $this->yellow->page->getContent() ?></div>
+<?php echo $this->yellow->page->getExtra("profiles") ?>
+<?php echo $this->yellow->page->getExtra("links") ?>
+<?php if ($this->yellow->page->isExisting("tag")): ?>
+    <hr/>
+    <div class="entry-tags"><p>
+    <!-- <?php echo $this->yellow->language->getTextHtml("blogTag") ?>  -->
+    <?php echo '<span style="margin-bottom: 0;"><svg class="icon"><use xlink:href="#tag"></use></svg></span>'; ?>
+   
+    <?php $tagCounter = 0; foreach (preg_split("/\s*,\s*/", $this->yellow->page->get("tag")) as $tag) { if (++$tagCounter>1) echo ", "; echo "<a href=\"".$this->yellow->page->getPage("blogStart")->getLocation(true).$this->yellow->lookup->normaliseArguments("tag:$tag")."\">".htmlspecialchars($tag)."</a>"; } ?></p>
+    </div>
+<?php endif ?>
+<!-- <?php echo $this->yellow->page->getExtra("comments") ?> -->
+</article>
+</section>
+</main>
+<?php $this->yellow->layout("blog-sidebar") ?>
+<?php $this->yellow->layout("footer") ?>
