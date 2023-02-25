@@ -61,12 +61,12 @@ The sidebar column shows the bolded entry of the `9-about` section, the 'recent 
 
 In the `main` block, in the case of showing the search by tags or authors, an icon with the corresponding category (tag or author) and the search item will appear in the title of the section.
 
-#### Input Detail Template
+#### Blog entries Detail Template
 The `delta-blog.html` template generates the output of _display an entry_. It includes the title of the post, the author, the date of publication and the social networks where the post is shared, the body of the post and its tags.
 
 <p align="center"><img src="page-bloc entry.png?raw=true" alt="Screenshot" width="350" style="border:#333 1px solid "></p>
 
-The author reference includes a generic author icon that can be changed to a custom author icon with their image, as provided in the _delta-blog.html_ template. The image must have the author's name without spaces with the `.png` extension in the `media/thumbnails/` folder.
+The  `author` reference includes a generic _author icon_ that can be changed to a _custom author icon_ with their image, as provided in the _delta-blog.html_ template. The image must have the author's name without spaces with the `.png` extension in the `media/thumbnails/` folder.
 
 The _Share with_ entry includes 3 social networks and copy link.
 
