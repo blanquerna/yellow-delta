@@ -1,7 +1,7 @@
 # yellow-delta
 Theme for Datenstrom-Yellow 0.8.3
 
-Basad en la gran feina de disseny de l'equip de Datenstrom i de Martin Blomgren amb el seu tema [Clarity](https://github.com/zenblom/yellow-clarity)
+Based on the great design work of the Datenstrom team and Martin Blomgren with their theme [Clarity](https://github.com/zenblom/yellow-clarity)
 
 ## Semantic HTML
 Redefined the structure of the following pages with the layout and tag elements according to the model
