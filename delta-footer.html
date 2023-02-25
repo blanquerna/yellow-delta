@@ -1,0 +1,19 @@
+<?php $this->yellow->layout("icons") ?>
+<footer class="footer" role="contentinfo">
+    <div class="footer_main"></div>
+    <div class="siteinfo">
+        <p class="copyright">
+        <img src="<?php echo $this->yellow->page->getBase(true) ?>/media/themes/delta.png" class="icon icon_2" alt="Delta">
+            
+            &copy;&nbsp;Delta&nbsp;&nbsp;(2001-<span class="year"><?php echo date("Y") ?></span>). All Rights Reserved
+            <span>&nbsp;&nbsp;|&nbsp;&nbsp;Powered with <a href="https://datenstrom.se/yellow/">Datenstrom Yellow</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;<a href="/about/legal">Avís legal / Legal notice</a></span>
+        </p>
+
+    </div>
+    <div class="siteinfo-banner"></div>
+<?php echo $this->yellow->page->getExtra("footer") ?>
+</footer>
+<div id="goTop"><a onclick="(function() { window.scrollTo(0, 0); })()"><svg class="icon"><use xlink:href="#arrow"></use></svg></a></div>
+</body>
+</html>

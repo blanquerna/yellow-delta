@@ -1,0 +1,8 @@
+<?php $this->yellow->layout("header") ?>
+<main class="content">
+    <section class="main" role="main" style="padding:15% 0 0 15%;font-size:120%;">
+            <h1><?php echo $this->yellow->page->getHtml("titleContent") ?></h1>
+            <p><?php echo $this->yellow->page->getContent() ?></p>
+    </section>
+</main>
+<?php $this->yellow->layout("footer") ?>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="<?php echo $this->yellow->page->getHtml("language") ?>">
+<head>
+<title><?php echo $this->yellow->page->getHtml("titleHeader") ?></title>
+<meta charset="utf-8" />
+<meta name="description" content="<?php echo $this->yellow->page->getHtml("description") ?>" />
+<meta name="author" content="<?php echo $this->yellow->page->getHtml("author") ?>" />
+<meta name="generator" content="Datenstrom Yellow" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<?php echo $this->yellow->page->getExtra("header") ?>
+</head>
+<body>
+<header class="<?php echo "page layout-".$this->yellow->page->getHtml("layout") ?>">
+<!--         
+    <h1 class="sitename"><span class="sitename-logo"></span>  
+        <a class="nav_brand nav_item" href="<?php echo $this->yellow->page->getBase(true)."/" ?>">
+        <span class="sitename-text"><?php echo $this->yellow->page->getHtml("sitename") ?></span></a>
+    </h1>
+    <div class="sitename-banner"></div>
+ -->
+<?php echo $this->yellow->page->getPage("header")->getContent() ?>
+</header>
+<?php $this->yellow->layout("navigation") ?>
+
