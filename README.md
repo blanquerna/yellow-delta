@@ -3,6 +3,13 @@ Theme for Datenstrom-Yellow 0.8.3
 
 Based on the great design work of the Datenstrom team and Martin Blomgren with their theme [Clarity](https://github.com/zenblom/yellow-clarity)
 
+## Manual theme installation
+* Download the theme and unzip the zip file.  
+* Open the extension.ini file  
+* Copy the files to the respective locations indicated in extension.ini: `system/extensions` - `system/themes` - `system-layout`    
+* Adapt the theme  
+* Change the default theme to `system/extensions/yellow-system.ini  
+
 ## Semantic HTML
 Redefined the structure of the following pages with the layout and tag elements according to the model
 
