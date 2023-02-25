@@ -50,9 +50,9 @@ foreach ($pages as $page) {
         </h2>      
         <?php
         $output = null;
-        
-        if($this->yellow->page->isRequest("author") || $this->yellow->page->isRequest("tag")) $baseURL=$this->yellow->page->getUrl();
-        else $baseURL=$this->yellow->page->getPage("blogStart")->getLocation(true);
+        if ($this->yellow->page->get("blogWithFilter")) $baseURL=$this->yellow->page->getUrl();
+            else if($this->yellow->page->get("layout")=="blog") $baseURL=$this->yellow->page->getPage("blogStart")->getLocation(true);
+            else $baseURL=$this->yellow->page->getUrl();
         if (count($tags)) {
             uasort($tags, "strnatcasecmp");
             uksort($tags, "strnatcasecmp");
