@@ -29,8 +29,8 @@ For the printing of the content of the page only _the logo and the title of the 
 
 The default page template, _delta-default.html_, contemplates a single column, with no indication of the page title indicated in `Title`. All visualization must be indicated in the body of the page, including titles, subheadings, text, images, ...
 
-<p align="center"><img src="page-init.png?raw=true" alt="Screenshot" width="300" style="border:#333 1px solid; margin-left:30px;" >&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-<img src="page-init-v.png?raw=true" alt="Screenshot" width="300" style="border:#333 1px solid"></p>
+<p align="center"><img src="page-init.png?raw=true" alt="Screenshot" width="350" style="border:#333 1px solid; margin-left:30px;" >&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+<img src="page-init-v.png?raw=true" alt="Screenshot" width="350" style="border:#333 1px solid"></p>
 
 To control the display of pages in the menu the **Status** entry in the page header must be used. With the value `Status: unlisted` the page would not be visible from the menu, but would be accessible with a link.
 
@@ -50,8 +50,8 @@ The first is `delta-blog-start.html` which generates two types of output:
 * Entry to the blog with display of the latest entries
 * Display of entries subject to search by tag or author
 
-<p align="center"><img src="page-blog-all.png?raw=true" alt="Screenshot" width="300" style="border:#333 1px solid">&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-<img src="page-blog-tag.png?raw=true" alt="Screenshot" width="300" style="border:#333 1px solid"></p>
+<p align="center"><img src="page-blog-all.png?raw=true" alt="Screenshot" width="350" style="border:#333 1px solid">&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+<img src="page-blog-tag.png?raw=true" alt="Screenshot" width="350" style="border:#333 1px solid"></p>
 
 In the entries it is convenient to put the `[--more--]` tag after a few sentences so that only the first part is shown in these summary pages.
 
@@ -64,11 +64,11 @@ In the `main` block, in the case of showing the search by tags or authors, an ic
 #### Input Detail Template
 The `delta-blog.html` template generates the output of _display an entry_. It includes the title of the post, the author, the date of publication and the social networks where the post is shared, the body of the post and its tags.
 
-<p align="center"><img src="page-bloc entry.png?raw=true" alt="Screenshot" width="300" style="border:#333 1px solid "></p>
+<p align="center"><img src="page-bloc entry.png?raw=true" alt="Screenshot" width="350" style="border:#333 1px solid "></p>
 
 The author reference includes a generic author icon that can be changed to a custom author icon with their image, as provided in the _delta-blog.html_ template. The image must have the author's name without spaces with the `.png` extension in the `media/thumbnails/` folder.
 
-The _Share with_ entry includes 3 social networks and copy the link.
+The _Share with_ entry includes 3 social networks and copy link.
 
 The entry footer includes the assigned tags.
 
