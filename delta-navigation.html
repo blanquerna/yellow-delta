@@ -1,6 +1,21 @@
 <nav class="header" role="banner">
 <?php $pages = $this->yellow->content->top() ?>
 <?php $this->yellow->page->setLastModified($pages->getModified()) ?>
+<?php  
+function addSubmenu($point){
+    $children = $point->getChildren($showInvisible = false);
+    $output = '<span class="nav_child"></span><ul class="nav_sub">';
+    foreach ($children as $child) {
+        $title = $child->get("titleNavigation");
+        $curr = $child->isActive() ? ' class="active" aria-current="page"' : '';
+        $output .= '<li class="nav_child nav_item"><a ' . $curr . 'href="' . $child->getLocation(true) . '">' . htmlspecialchars($title) . '</a>';
+        if(count($child->getChildren($showInvisible = false))) $output .=addSubmenu($child);
+        $output .= '</li>';
+    }
+    $output .= '</ul>';
+    return $output;
+}
+?>
     <span class="sitename-logo"><img src="<?php echo $this->yellow->page->getBase(true) ?>/media/themes/delta.png" class="icon icon_2" alt="Delta"></span>
     <ul class="navigation" role="navigation" aria-label="<?php echo $this->yellow->language->getTextHtml("coreNavigation") ?>">
     <?php foreach ($pages as $page): ?>
@@ -9,13 +24,8 @@
         $children = $page->getChildren($showInvisible = false);
         if (count($children) AND ($page->get('layout') != 'blog-start')) {
             $output = "<a class=\"nav_item\" href=\"".$page->getLocation(true)."\">".$page->getHtml("titleNavigation")."<span><svg class=\"icon nav_icon\"><use xlink:href=\"#caret\"></use></svg></span></a>";
-            $output .= '<ul class="nav_sub"><span class="nav_child"></span>';
-            foreach ($children as $child) {
-                $title = $child->get("titleNavigation");
-                $curr = $child->isActive() ? ' class="active" aria-current="page"' : '';
-                $output .= '<li class="nav_child nav_item"><a ' . $curr . 'href="' . $child->getLocation(true) . '">' . htmlspecialchars($title) . '</a></li>';
+            $output .= addSubmenu($page);
             }
-            $output .= '</ul>';
         } else {
             $output = "<a class=\"nav_item\" href=\"".$page->getLocation(true)."\">".$page->getHtml("titleNavigation")."</a>";
         }
